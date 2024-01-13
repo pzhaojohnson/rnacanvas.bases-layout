@@ -6,3 +6,6 @@ export { shift };
 
 import { Centroid } from './Centroid';
 export { Centroid };
+
+import { rotate } from './rotate';
+export { rotate };
