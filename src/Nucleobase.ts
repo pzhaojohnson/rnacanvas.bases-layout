@@ -3,6 +3,9 @@ export type Point = {
   y: number;
 };
 
+/**
+ * A base in a nucleic acid structure drawing.
+ */
 export interface Nucleobase {
   getCenterPoint(): Point;
 
