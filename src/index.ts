@@ -15,3 +15,6 @@ export { Direction };
 
 import { flipX } from './flipX';
 export { flipX };
+
+import { flipY } from './flipY';
+export { flipY };
