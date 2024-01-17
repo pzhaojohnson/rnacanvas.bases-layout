@@ -9,3 +9,6 @@ export { Centroid };
 
 import { rotate } from './rotate';
 export { rotate };
+
+import { Direction } from './Direction';
+export { Direction };
