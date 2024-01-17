@@ -12,3 +12,6 @@ export { rotate };
 
 import { Direction } from './Direction';
 export { Direction };
+
+import { flipX } from './flipX';
+export { flipX };
