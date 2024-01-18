@@ -18,3 +18,6 @@ export { flipX };
 
 import { flipY } from './flipY';
 export { flipY };
+
+import { flipSelfX } from './flipSelfX';
+export { flipSelfX };
