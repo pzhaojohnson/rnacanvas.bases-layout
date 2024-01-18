@@ -21,3 +21,6 @@ export { flipY };
 
 import { flipSelfX } from './flipSelfX';
 export { flipSelfX };
+
+import { flipSelfY } from './flipSelfY';
+export { flipSelfY };
