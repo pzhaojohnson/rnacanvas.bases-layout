@@ -25,5 +25,8 @@ export { flipSelfX };
 import { flipSelfY } from './flipSelfY';
 export { flipSelfY };
 
+import { linearize } from './linearize';
+export { linearize };
+
 import { circularize } from './circularize';
 export { circularize };
