@@ -28,5 +28,8 @@ export { flipSelfY };
 import { linearize } from './linearize';
 export { linearize };
 
+import { stemmify } from './stemmify';
+export { stemmify };
+
 import { circularize } from './circularize';
 export { circularize };
