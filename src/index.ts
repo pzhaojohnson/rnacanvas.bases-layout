@@ -28,6 +28,9 @@ export { flipSelfY };
 import { linearize } from './linearize';
 export { linearize };
 
+import { straighten } from './straighten';
+export { straighten };
+
 import { stemmify } from './stemmify';
 export { stemmify };
 
