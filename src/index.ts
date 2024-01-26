@@ -36,3 +36,6 @@ export { stemmify };
 
 import { circularize } from './circularize';
 export { circularize };
+
+import { round } from './round';
+export { round };
