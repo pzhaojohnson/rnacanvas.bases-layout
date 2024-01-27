@@ -1,6 +1,6 @@
 {
   "name": "@rnacanvas/bases-layout",
-  "version": "1.19.0",
+  "version": "1.20.0",
   "description": "Lay out the bases in a nucleic acid structure drawing",
   "main": "./dist/index.js",
   "scripts": {

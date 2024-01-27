@@ -16,6 +16,9 @@ export { MaxCenterX };
 import { MinCenterY } from './MinCenterY';
 export { MinCenterY };
 
+import { MaxCenterY } from './MaxCenterY';
+export { MaxCenterY };
+
 import { rotate } from './rotate';
 export { rotate };
 
