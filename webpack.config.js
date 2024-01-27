@@ -23,5 +23,6 @@ module.exports = {
       name: 'basesLayout',
       type: 'umd',
     },
+    clean: true,
   },
 };
