@@ -10,6 +10,9 @@ export { Centroid };
 import { MinCenterX } from './MinCenterX';
 export { MinCenterX };
 
+import { MaxCenterX } from './MaxCenterX';
+export { MaxCenterX };
+
 import { rotate } from './rotate';
 export { rotate };
 
