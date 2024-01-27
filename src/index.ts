@@ -7,6 +7,9 @@ export { shift };
 import { Centroid } from './Centroid';
 export { Centroid };
 
+import { MinCenterX } from './MinCenterX';
+export { MinCenterX };
+
 import { rotate } from './rotate';
 export { rotate };
 

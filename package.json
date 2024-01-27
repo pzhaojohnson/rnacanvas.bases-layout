@@ -1,6 +1,6 @@
 {
   "name": "@rnacanvas/bases-layout",
-  "version": "1.15.0",
+  "version": "1.16.0",
   "description": "Lay out the bases in a nucleic acid structure drawing",
   "main": "./dist/index.js",
   "scripts": {
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@rnacanvas/circles": "^2.1.0",
+    "@rnacanvas/math": "^1.3.0",
     "@rnacanvas/points": "^1.5.0",
     "@rnacanvas/vectors": "^1.2.0"
   }
