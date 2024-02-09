@@ -4,6 +4,8 @@ import { Centroid } from './Centroid';
 
 import { Direction } from './Direction';
 
+import { rotate } from './rotate';
+
 export type Options = {
   /**
    * The (radial) spacing between bases after being circularized.
@@ -44,9 +46,7 @@ export function circularize(targetBases: Nucleobase[], options: Options): void {
   let originalCentroidX = x;
   let originalCentroidY = y;
 
-  let direction = new Direction(targetBases);
-
-  let originalDirection = direction.get();
+  let originalDirection = (new Direction(targetBases)).get();
 
   let circumference = spacing * (targetBases.length - 1);
   circumference += terminiGap;
@@ -59,8 +59,14 @@ export function circularize(targetBases: Nucleobase[], options: Options): void {
 
   let radius = circumference / (2 * Math.PI);
 
+  // will result in the overall direction of the target bases being initially zero after circularization
+  let startingAngle = (
+    (Math.PI / 2)
+    + ((2 * Math.PI) * (0.5 * terminiGap / circumference))
+  );
+
   targetBases.forEach((b, i) => {
-    let angle = (2 * Math.PI) * (i * spacing) / circumference;
+    let angle = startingAngle + ((2 * Math.PI) * (i * spacing) / circumference);
 
     // use a centroid of (0, 0) to initially lay out the bases in a circle
     b.setCenterPoint({
@@ -69,7 +75,8 @@ export function circularize(targetBases: Nucleobase[], options: Options): void {
     });
   });
 
-  direction.set(originalDirection);
+  // note that the overall direction of the target bases cannot be directly set when the termini gap is zero
+  rotate(targetBases, originalDirection);
 
   centroid.set({ x: originalCentroidX, y: originalCentroidY });
 }
