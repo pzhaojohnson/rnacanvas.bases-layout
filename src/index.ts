@@ -1,6 +1,9 @@
 import { Nucleobase } from './Nucleobase';
 export { Nucleobase };
 
+import { NucleobaseMock } from './NucleobaseMock';
+export { NucleobaseMock };
+
 import { shift } from './shift';
 export { shift };
 
