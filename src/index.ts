@@ -54,3 +54,6 @@ export { circularize };
 
 import { round } from './round';
 export { round };
+
+import { radialize } from './radialize';
+export { radialize };
