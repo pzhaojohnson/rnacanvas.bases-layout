@@ -1,7 +1,11 @@
 {
   "name": "@rnacanvas/bases-layout",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Lay out the bases in a nucleic acid structure drawing",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pzhaojohnson/rnacanvas.bases-layout.git"
+  },
   "main": "./dist/index.js",
   "scripts": {
     "test": "jest",
