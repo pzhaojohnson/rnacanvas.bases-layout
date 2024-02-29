@@ -377,6 +377,38 @@ describe('radialize function', () => {
     expect((new Layout(seq)).isValid()).toBe(true);
   });
 
+  test('positive hairpin loop spacing', () => {
+    let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
+
+    radialize(seq, basePairs, { spacing: 2, basePairSpacing: 1, hairpinLoopSpacing: 3 });
+
+    expect((new Layout(seq)).isValid()).toBe(true);
+  });
+
+  test('hairpin loop spacing of zero', () => {
+    let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
+
+    radialize(seq, basePairs, { spacing: 2, basePairSpacing: 1, hairpinLoopSpacing: 0 });
+
+    expect((new Layout(seq)).isValid()).toBe(true);
+  });
+
+  test('negative hairpin loop spacing', () => {
+    let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
+
+    radialize(seq, basePairs, { spacing: 2, basePairSpacing: 1, hairpinLoopSpacing: -2.5 });
+
+    expect((new Layout(seq)).isValid()).toBe(true);
+  });
+
+  test('unspecified hairpin loop spacing', () => {
+    let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
+
+    radialize(seq, basePairs, { spacing: 2, basePairSpacing: 1 });
+
+    expect((new Layout(seq)).isValid()).toBe(true);
+  });
+
   /**
    * Creates some sample layouts using the radialize function
    * and writes them to a specified directory
@@ -400,7 +432,7 @@ describe('radialize function', () => {
       // test handling of unsorted base-pairs
       basePairs = shuffled(basePairs);
 
-      radialize(seq, basePairs, { spacing: 5, basePairSpacing: 5 });
+      radialize(seq, basePairs, { spacing: 5, basePairSpacing: 5, hairpinLoopSpacing: 2.5 });
 
       let layout = '';
 

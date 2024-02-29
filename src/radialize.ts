@@ -503,6 +503,11 @@ export type Options = {
    * The spacing between stacked base-pairs in stems.
    */
   basePairSpacing: number;
+
+  /**
+   * Spacing around unpaired bases in hairpin loops.
+   */
+  hairpinLoopSpacing?: number;
 };
 
 /**
@@ -522,6 +527,8 @@ export type Options = {
  */
 export function radialize(seq: Nucleobase[], basePairs: BasePair[], options: Options): void {
   let { spacing, basePairSpacing } = options;
+
+  let hairpinLoopSpacing = options.hairpinLoopSpacing ?? spacing;
 
   let targetStructure = new Structure(seq, basePairs);
 
@@ -568,9 +575,10 @@ export function radialize(seq: Nucleobase[], basePairs: BasePair[], options: Opt
     .filter(loop => loop.enclosedPairedBases.length == 0)
     .forEach(loop => loop.closingStem.stemmify().with({ basePairLength: spacing, basePairSpacing }));
 
-  [...linkers.thatAreHairpinLoops].forEach(li => li.round().with({ spacing }));
-
   [...linkers.notBetweenSiblingStems].forEach(li => li.round().with({ spacing }));
+
+  // do after linkers that are not between sibling stems in general
+  [...linkers.thatAreHairpinLoops].forEach(li => li.round().with({ spacing: hairpinLoopSpacing }));
 
   // only do this for linkers with at least three unpaired bases
   [...linkers.notInOutermostLoop.betweenSiblingStems]
