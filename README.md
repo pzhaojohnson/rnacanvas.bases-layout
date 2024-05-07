@@ -71,3 +71,32 @@ centroid.get(); // { x: 4, y: 6 }
 // move the bases such that their centroid is now (33, 41)
 centroid.set({ x: 33, y: 41 });
 ```
+
+## `Direction`
+
+The `Direction` class represents the overall direction of an ordered collection of nucleobases
+(i.e., it is the direction of the vector that results from traversing the bases in order
+and adding the individual vectors connecting each consecutive pair of bases).
+
+This is also equal to simply the direction of the vector from the first base to the last base.
+
+This class expresses direction values in radians.
+
+The `set` method of this class can also be used to rotate the target bases
+such that their overall direction becomes the specified direction.
+
+```typescript
+let bases = [
+  new NucleobaseMock({ centerPoint: { x: 124, y: 4134 } }),
+  new NucleobaseMock({ centerPoint: { x: 8, y: 0 } }),
+  new NucleobaseMock({ centerPoint: { x: 99, y: -2 } }),
+  new NucleobaseMock({ centerPoint: { x: 551, y: 7 } }),
+];
+
+let direction = new Direction(bases);
+
+direction.get(); // -1.4676981844274177
+
+// rotates the target bases such their overall direction becomes 0.62
+direction.set(0.62);
+```
