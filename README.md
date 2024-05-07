@@ -49,3 +49,25 @@ b.getCenterPoint(); // { x: 92.3, y: -57.2 }
 
 b.setCenterPoint({ x: 111.5, y: 63 });
 ```
+
+## `Centroid`
+
+The `Centroid` class represents the centroid of a collection of nucleobases
+(where the centroid is defined as the "average" of the center points of all the bases).
+
+Setting this will move the bases.
+
+```typescript
+let bases = [
+  new NucleobaseMock({ centerPoint: { x: 10, y: 22 } }),
+  new NucleobaseMock({ centerPoint: { x: 2, y: 8 } }),
+  new NucleobaseMock({ centerPoint: { x: 0, y: -12 } }),
+];
+
+let centroid = new Centroid(bases);
+
+centroid.get(); // { x: 4, y: 6 }
+
+// move the bases such that their centroid is now (33, 41)
+centroid.set({ x: 33, y: 41 });
+```
