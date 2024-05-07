@@ -100,3 +100,21 @@ direction.get(); // -1.4676981844274177
 // rotates the target bases such their overall direction becomes 0.62
 direction.set(0.62);
 ```
+
+## `shift()`
+
+Shifts the target bases by the given displacement vector.
+
+```typescript
+let bases = [
+  new NucleobaseMock({ centerPoint: { x: 14, y: 12 } }),
+  new NucleobaseMock({ centerPoint: { x: 140, y: 437 } }),
+  new NucleobaseMock({ centerPoint: { x: -2, y: -88 } }),
+];
+
+shift(bases, { x: 38, y: -124 });
+
+bases[0].getCenterPoint(); // { x: 52, y: -112 }
+bases[1].getCenterPoint(); // { x: 178, y: 313 }
+bases[2].getCenterPoint(); // { x: 36, y: -212 }
+```
