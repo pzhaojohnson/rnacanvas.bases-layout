@@ -32,3 +32,20 @@ interface Nucleobase {
   setCenterPoint(p: { x: number, y: number }): void;
 }
 ```
+
+## `NucleobaseMock`
+
+The `NucleobaseMock` class is a simple class that just stores the coordinates of a center point
+(and is primarily used for testing purposes).
+
+It is often possible, though, to improve the performance of layout operations on nucleobases
+by performing them on mock nucleobases first
+and then copying the final coordinates of the mock nucleobases to the actual nucleobases that one is working with.
+
+```typescript
+let b = new NucleobaseMock({ centerPoint: { x: 92.3, y: -57.2 } });
+
+b.getCenterPoint(); // { x: 92.3, y: -57.2 }
+
+b.setCenterPoint({ x: 111.5, y: 63 });
+```
