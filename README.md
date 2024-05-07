@@ -23,7 +23,7 @@ import { circularize, round } from '@rnacanvas/bases-layout';
 
 The `Nucleobase` interface defines the expected interface for nucleobases used throughout this package.
 
-Basically, nucleobases just have to have a `getCenterPoint()` method and a `setCenterPoint()` method.
+(Basically, nucleobases just have to have a `getCenterPoint()` method and a `setCenterPoint()` method.)
 
 ```typescript
 interface Nucleobase {
