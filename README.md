@@ -157,3 +157,12 @@ let bases = [
 
 straighten(bases);
 ```
+
+## `linearize()`
+
+Arranges the target bases in a straight line
+(with the specified spacing between the center points of each consecutive pair of bases).
+
+```typescript
+linearize(bases, { spacing: 20 });
+```
