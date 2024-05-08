@@ -140,3 +140,20 @@ rotate(bases, Math.PI / 4);
 
 direction.get(); // 2.282044970533724
 ```
+
+## `straighten()`
+
+Arranges the target bases in a straight line,
+maintaining the original positions of the first and last bases
+and spacing the bases evenly.
+
+```typescript
+let bases = [
+  new NucleobaseMock({ centerPoint: { x: 81, y: 7 } }),
+  new NucleobaseMock({ centerPoint: { x: 92, y: 12 } }),
+  new NucleobaseMock({ centerPoint: { x: 401, y: -42 } }),
+  new NucleobaseMock({ centerPoint: { x: -3819, y: 4829 } }),
+];
+
+straighten(bases);
+```
