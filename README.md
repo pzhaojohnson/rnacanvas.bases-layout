@@ -163,6 +163,9 @@ straighten(bases);
 Arranges the target bases in a straight line
 (with the specified spacing between the center points of each consecutive pair of bases).
 
+At present, this function will maintain the original centroid and overall direction (see the `Direction` class) of the target bases,
+though this might be subject to change in the future.
+
 ```typescript
 linearize(bases, { spacing: 20 });
 ```
