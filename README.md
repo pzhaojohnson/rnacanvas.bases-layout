@@ -118,3 +118,25 @@ bases[0].getCenterPoint(); // { x: 52, y: -112 }
 bases[1].getCenterPoint(); // { x: 178, y: 313 }
 bases[2].getCenterPoint(); // { x: 36, y: -212 }
 ```
+
+## `rotate()`
+
+Rotates the target bases by the given angle (specified in radians).
+
+Bases are rotated in the direction of increasing direction angles
+(i.e., counterclockwise in the standard Cartesian coordinate system).
+
+```typescript
+let bases = [
+  new NucleobaseMock({ centerPoint: { x: 12, y: 100 } }),
+  new NucleobaseMock({ centerPoint: { x: -58, y: -2 } }),
+  new NucleobaseMock({ centerPoint: { x: 64, y: 800 } }),
+];
+
+let direction = new Direction(bases);
+direction.get(); // 1.496646807136276
+
+rotate(bases, Math.PI / 4);
+
+direction.get(); // 2.282044970533724
+```
