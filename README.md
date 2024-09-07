@@ -184,10 +184,32 @@ reported by [Smit et al., 2008](https://www.ibi.vu.nl/programs/k2nwww/static/met
 
 ```javascript
 // an array of bases
-var seq = [...'AUCGAUCGUAGCUAGCAUGC'].map(letter => Nucleobase.create(letter));
+var seq = [...'AUCGAUCGUAGCUAGGC'].map(letter => Nucleobase.create(letter));
 
-// imported from the `@rnacanvas/base-pairs` package
-var basePairs = [...parseDotBracket(seq, '...((((.....))))..')];
+// the `parseDotBracket()` function can be imported
+// from the `@rnacanvas/base-pairs` package
+var basePairs = [...parseDotBracket(seq, '..(((.....))).')];
 
-arrange(seq, basePairs, { spacing: 10 });
+var options = { spacing: 10 };
+
+arrange(seq, basePairs, options);
+```
+
+Options to the `arrange()` function include the following.
+
+```typescript
+type Options = {
+  // the spacing between consecutive bases in general
+  spacing: number;
+
+  // the spacing between stacked base-pairs in stems
+  basePairSpacing: number;
+
+  // the spacing between consecutive bases in hairpin loops
+  hairpinLoopSpacing: number;
+
+  // the spacing between the first and last bases
+  // in the outermost loop
+  terminiGap: number;
+};
 ```
