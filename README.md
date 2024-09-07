@@ -184,7 +184,7 @@ reported by [Smit et al., 2008](https://www.ibi.vu.nl/programs/k2nwww/static/met
 
 ```javascript
 // an array of bases
-var seq = [...'AUCGAUCGUAGCUAGGC'].map(letter => Nucleobase.create(letter));
+var seq = [...'AUCGAUCGUAGCUAGGC'].map(() => new NucleobaseMock());
 
 // the `parseDotBracket()` function can be imported
 // from the `@rnacanvas/base-pairs` package
@@ -211,8 +211,7 @@ type Options = {
   // (defaults to `spacing`)
   hairpinLoopSpacing: number;
 
-  // the spacing between the first and last bases
-  // in the outermost loop
+  // the spacing between the first and last bases in the outermost loop
   // (defaults to `spacing`)
   terminiGap: number;
 };
