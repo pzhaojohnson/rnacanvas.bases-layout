@@ -55,5 +55,8 @@ export { circularize };
 import { round } from './round';
 export { round };
 
+import { arrange } from './arrange';
+export { arrange };
+
 import { radialize } from './radialize';
 export { radialize };
