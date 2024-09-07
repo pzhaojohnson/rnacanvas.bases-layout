@@ -195,21 +195,25 @@ var options = { spacing: 10 };
 arrange(seq, basePairs, options);
 ```
 
-Options for the `arrange()` function include the following.
+Options to the `arrange()` function include the following.
 
 ```typescript
 type Options = {
   // the spacing between consecutive bases in general
+  // (is required)
   spacing: number;
 
   // the spacing between stacked base-pairs in stems
+  // (defaults to `spacing`)
   basePairSpacing: number;
 
   // the spacing between consecutive bases in hairpin loops
+  // (defaults to `spacing`)
   hairpinLoopSpacing: number;
 
   // the spacing between the first and last bases
   // in the outermost loop
+  // (defaults to `spacing`)
   terminiGap: number;
 };
 ```
