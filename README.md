@@ -195,7 +195,7 @@ var options = { spacing: 10 };
 arrange(seq, basePairs, options);
 ```
 
-Options to the `arrange()` function include the following.
+Options for the `arrange()` function include the following.
 
 ```typescript
 type Options = {
