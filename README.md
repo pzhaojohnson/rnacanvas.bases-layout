@@ -169,3 +169,25 @@ though this might be subject to change in the future.
 ```typescript
 linearize(bases, { spacing: 20 });
 ```
+
+## `arrange()`
+
+Arranges bases into stems and loops
+(based on the base-pairs present)
+with no attempt to avoid overlaps among bases.
+
+This would correspond to a polygonal layout,
+as reported by [Shapiro et al., 1982](https://pubmed.ncbi.nlm.nih.gov/7177857/).
+
+Pseudoknots are ignored according to the incremental range heuristic
+reported by [Smit et al., 2008](https://www.ibi.vu.nl/programs/k2nwww/static/method.html).
+
+```javascript
+// an array of bases
+var seq = [...'AUCGAUCGUAGCUAGCAUGC'].map(letter => Nucleobase.create(letter));
+
+// imported from the `@rnacanvas/base-pairs` package
+var basePairs = [...parseDotBracket(seq, '...((((.....))))..')];
+
+arrange(seq, basePairs, { spacing: 10 });
+```
