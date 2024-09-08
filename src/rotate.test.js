@@ -2,7 +2,11 @@ import { rotate } from './rotate';
 
 import { NucleobaseMock } from './NucleobaseMock';
 
-import { Centroid } from './Centroid';
+import { midpoint } from '@rnacanvas/points'
+
+import { distance } from '@rnacanvas/points'
+
+import { direction } from '@rnacanvas/points'
 
 describe('rotate function', () => {
   test('an empty array of target bases', () => {
@@ -31,31 +35,27 @@ describe('rotate function', () => {
       new NucleobaseMock({ centerPoint: { x: 7, y: -4 } }),
     ];
 
-    let centroid = new Centroid(targetBases);
+    // the anchor point for rotation
+    let anchorPoint = midpoint(targetBases[0].getCenterPoint(), targetBases[4].getCenterPoint());
 
-    expect(centroid.get().x).toBeCloseTo(278.8);
-    expect(centroid.get().y).toBeCloseTo(-182);
+    let originalCenterPoints = targetBases.map(b => b.getCenterPoint());
+
+    let originalDistances = targetBases.map(b => distance(anchorPoint, b.getCenterPoint()));
+
+    let originalDirections = targetBases.map(b => direction(anchorPoint, b.getCenterPoint()));
 
     rotate(targetBases, 4 * Math.PI / 3);
 
-    // maintains centroid
-    expect(centroid.get().x).toBeCloseTo(278.8);
-    expect(centroid.get().y).toBeCloseTo(-182);
+    targetBases.forEach((b, i) => expect(b.getCenterPoint()).not.toEqual(originalCenterPoints[i]));
 
-    expect(targetBases[0].getCenterPoint().x).toBeCloseTo(633.1704526);
-    expect(targetBases[0].getCenterPoint().y).toBeCloseTo(-76.21237146);
+    targetBases.forEach((b, i) => {
+      expect(distance(anchorPoint, b.getCenterPoint())).toBeCloseTo(originalDistances[i]);
+    });
 
-    expect(targetBases[1].getCenterPoint().x).toBeCloseTo(606.3691824);
-    expect(targetBases[1].getCenterPoint().y).toBeCloseTo(-22.63353314);
-
-    expect(targetBases[2].getCenterPoint().x).toBeCloseTo(-734.2087803);
-    expect(targetBases[2].getCenterPoint().y).toBeCloseTo(-300.582676);
-
-    expect(targetBases[3].getCenterPoint().x).toBeCloseTo(319.8166235);
-    expect(targetBases[3].getCenterPoint().y).toBeCloseTo(-474.9571242);
-
-    expect(targetBases[4].getCenterPoint().x).toBeCloseTo(568.8525219);
-    expect(targetBases[4].getCenterPoint().y).toBeCloseTo(-35.61429525);
+    targetBases.forEach((b, i) => {
+      let d = direction(anchorPoint, b.getCenterPoint());
+      expect((originalDirections[i] + (4 * Math.PI / 3) - d) % (2 * Math.PI)).toBeCloseTo(0);
+    });
   });
 
   test('rotating by a negative angle', () => {
@@ -65,25 +65,27 @@ describe('rotate function', () => {
       new NucleobaseMock({ centerPoint: { x: 64, y: 800 } }),
     ];
 
-    let centroid = new Centroid(targetBases);
+    // the anchor point for rotation
+    let anchorPoint = midpoint(targetBases[0].getCenterPoint(), targetBases[2].getCenterPoint());
 
-    expect(centroid.get().x).toBeCloseTo(6);
-    expect(centroid.get().y).toBeCloseTo(299.3333333);
+    let originalCenterPoints = targetBases.map(b => b.getCenterPoint());
+
+    let originalDistances = targetBases.map(b => distance(anchorPoint, b.getCenterPoint()));
+
+    let originalDirections = targetBases.map(b => direction(anchorPoint, b.getCenterPoint()));
 
     rotate(targetBases, -Math.PI / 4);
 
-    // maintains centroid
-    expect(centroid.get().x).toBeCloseTo(6);
-    expect(centroid.get().y).toBeCloseTo(299.3333333);
+    targetBases.forEach((b, i) => expect(b.getCenterPoint()).not.toEqual(originalCenterPoints[i]));
 
-    expect(targetBases[0].getCenterPoint().x).toBeCloseTo(-130.707311);
-    expect(targetBases[0].getCenterPoint().y).toBeCloseTo(154.1407409);
+    targetBases.forEach((b, i) => {
+      expect(distance(anchorPoint, b.getCenterPoint())).toBeCloseTo(originalDistances[i]);
+    });
 
-    expect(targetBases[1].getCenterPoint().x).toBeCloseTo(-252.3296774);
-    expect(targetBases[1].getCenterPoint().y).toBeCloseTo(131.5133239);
-
-    expect(targetBases[2].getCenterPoint().x).toBeCloseTo(401.0369884);
-    expect(targetBases[2].getCenterPoint().y).toBeCloseTo(612.3459351);
+    targetBases.forEach((b, i) => {
+      let d = direction(anchorPoint, b.getCenterPoint());
+      expect((originalDirections[i] + (-Math.PI / 4) - d) % (2 * Math.PI)).toBeCloseTo(0);
+    });
   });
 
   test('multiple target bases all on top of each other', () => {

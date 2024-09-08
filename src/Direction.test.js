@@ -2,7 +2,7 @@ import { Direction } from './Direction';
 
 import { NucleobaseMock } from './NucleobaseMock';
 
-import { Centroid } from './Centroid';
+import { midpoint } from '@rnacanvas/points';
 
 describe('Direction class', () => {
   describe('get method', () => {
@@ -150,7 +150,7 @@ describe('Direction class', () => {
       expect(direction.get()).toBeCloseTo(-0.7965076610176354);
     });
 
-    it('maintains centroid', () => {
+    it('maintains the midpoint between first and last bases', () => {
       let targetBases = [
         new NucleobaseMock({ centerPoint: { x: 124, y: 4134 } }),
         new NucleobaseMock({ centerPoint: { x: 8, y: 0 } }),
@@ -158,10 +158,8 @@ describe('Direction class', () => {
         new NucleobaseMock({ centerPoint: { x: 551, y: 7 } }),
       ];
 
-      let centroid = new Centroid(targetBases);
-
-      expect(centroid.get().x).toBeCloseTo(195.5);
-      expect(centroid.get().y).toBeCloseTo(1034.75);
+      // the anchor point for rotation
+      let anchorPoint = midpoint(targetBases[0].getCenterPoint(), targetBases[3].getCenterPoint());
 
       let direction = new Direction(targetBases);
 
@@ -170,9 +168,8 @@ describe('Direction class', () => {
       direction.set(0.62);
       expect(direction.get()).toBeCloseTo(0.62);
 
-      // centroid was maintained
-      expect(centroid.get().x).toBeCloseTo(195.5);
-      expect(centroid.get().y).toBeCloseTo(1034.75);
+      expect(midpoint(targetBases[0].getCenterPoint(), targetBases[3].getCenterPoint()).x).toBeCloseTo(anchorPoint.x);
+      expect(midpoint(targetBases[0].getCenterPoint(), targetBases[3].getCenterPoint()).y).toBeCloseTo(anchorPoint.y);
 
       // bases were moved
       expect(targetBases[0].getCenterPoint().x).not.toBeCloseTo(124);
