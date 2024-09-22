@@ -30,6 +30,8 @@ import { min, max } from '@rnacanvas/math';
 
 import { displacement, distance } from '@rnacanvas/points';
 
+import { Point } from '@rnacanvas/points.oopified';
+
 class IntegerRange {
   static from(start: number) {
     return {
@@ -195,7 +197,7 @@ class Stem {
             let { basePairLength, basePairSpacing } = options;
 
             // cache the actual numbers just in case the gotten object as live properties
-            let anchorPoint = { ...firstBase.getCenterPoint() };
+            let anchorPoint = Point.matching(firstBase.getCenterPoint());
 
             stemmify(flat, { basePairLength, basePairSpacing });
 
@@ -277,7 +279,7 @@ class Linker {
                 let lastUnpairedBase = unpairedBases[unpairedBases.length - 1];
 
                 // cache the actual numbers just in case the gotten object has live properties
-                let anchorPoint = { ...firstUnpairedBase.getCenterPoint() };
+                let anchorPoint = Point.matching(firstUnpairedBase.getCenterPoint());
 
                 stemmify(unpairedBases, {
                   basePairLength: distance(firstUnpairedBase.getCenterPoint(), lastUnpairedBase.getCenterPoint()),
@@ -455,7 +457,7 @@ class Loop {
                       .map(() => new NucleobaseMock({ centerPoint: { x: 0, y: 0 } }));
 
                     // cache the actual numbers just in case the gotten object has live properties
-                    let anchorPoint = { ...closingBasePair[0].getCenterPoint() };
+                    let anchorPoint = Point.matching(closingBasePair[0].getCenterPoint());
 
                     circularize([
                       closingBasePair[0],
@@ -543,7 +545,7 @@ export function radialize(seq: Nucleobase[], basePairs: BasePair[], options: Opt
   }
 
   // cache the actual numbers just in case the gotten object has live properties
-  let originalCentroid = { ...(new Centroid(seq)).get() };
+  let originalCentroid = Point.matching((new Centroid(seq)).get());
 
   let originalDirection = (new Direction(seq)).get();
 
