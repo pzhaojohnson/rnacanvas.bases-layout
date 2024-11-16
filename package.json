@@ -1,6 +1,6 @@
 {
   "name": "@rnacanvas/bases-layout",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Lay out the bases in a nucleic acid structure drawing",
   "repository": {
     "type": "git",
@@ -32,7 +32,7 @@
     "@rnacanvas/points": "^1.5.0",
     "@rnacanvas/points.oopified": "^1.9.0",
     "@rnacanvas/position-pairs": "^2.4.0",
-    "@rnacanvas/utilities": "^2.1.0",
+    "@rnacanvas/utilities": "^4.1.0",
     "@rnacanvas/value-check": "^1.6.2",
     "@rnacanvas/vectors": "^1.2.0"
   }
