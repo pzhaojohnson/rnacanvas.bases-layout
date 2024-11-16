@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import { arrange } from './arrange';
 
 import { NucleobaseMock } from './NucleobaseMock';

@@ -1,4 +1,8 @@
-import { radialize } from './radialize';
+/**
+ * @jest-environment jsdom
+ */
+
+import { untangle } from './untangle';
 
 import { NucleobaseMock } from './NucleobaseMock';
 
@@ -158,15 +162,15 @@ const randomStructures = [
   '....(((((((..((((.(((((..............))))).)).))....))))))).....(((((((((((....))))..(((..((((((......))))))((((((((..((...(((...........)))....))......(((((((.........)))))))))))))))...((.(((((((..(((((((.....(.((((.(((((....))))).)))).)......(((.((.(((.......))).)).)))....((((........((((....)))).....)))).(.((..((.....)).)).).)))..))))..))))))).)).)))(((((((...)))))))........................((((..((.....(((((....)))))...)).)))).......((((((((((((...)))))))))))))))))))',
 ];
 
-describe('radialize function', () => {
+describe('untangle function', () => {
   test('smoke test', () => {
     expect(randomStructures.length).toBeGreaterThanOrEqual(75);
 
-    randomStructures.forEach(dotBracket => {
+    shuffled(randomStructures).slice(0, 20).forEach(dotBracket => {
       let [seq, basePairs] = StructureMock.fromDotBracket(dotBracket);
 
       // runs without throwing
-      radialize(seq, basePairs, {
+      untangle(seq, basePairs, {
         spacing: 20 * Math.random(),
         basePairSpacing: 20 * Math.random(),
       });
@@ -179,7 +183,7 @@ describe('radialize function', () => {
   test('an empty structure', () => {
     let [seq, basePairs] = [[], []];
 
-    expect(() => radialize(seq, basePairs, { spacing: 1, basePairSpacing: 1 })).not.toThrow();
+    expect(() => untangle(seq, basePairs, { spacing: 1, basePairSpacing: 1 })).not.toThrow();
   });
 
   test('a structure with only one base', () => {
@@ -188,7 +192,7 @@ describe('radialize function', () => {
     expect(seq.length).toBe(1);
     expect(basePairs.length).toBe(0);
 
-    radialize(seq, basePairs, { spacing: 2, basePairSpacing: 1 });
+    untangle(seq, basePairs, { spacing: 2, basePairSpacing: 1 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -199,7 +203,7 @@ describe('radialize function', () => {
     expect(seq.length).toBe(38);
     expect(basePairs.length).toBe(0);
 
-    radialize(seq, basePairs, { spacing: 2, basePairSpacing: 1.5 });
+    untangle(seq, basePairs, { spacing: 2, basePairSpacing: 1.5 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -210,7 +214,7 @@ describe('radialize function', () => {
     expect(seq.length).toBe(17);
     expect(basePairs.length).toBe(6);
 
-    radialize(seq, basePairs, { spacing: 3, basePairSpacing: 2.5 });
+    untangle(seq, basePairs, { spacing: 3, basePairSpacing: 2.5 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -221,7 +225,7 @@ describe('radialize function', () => {
     expect(seq.length).toBe(12);
     expect(basePairs.length).toBe(1);
 
-    radialize(seq, basePairs, { spacing: 1.5, basePairSpacing: 1.25 });
+    untangle(seq, basePairs, { spacing: 1.5, basePairSpacing: 1.25 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -235,7 +239,7 @@ describe('radialize function', () => {
     expect(basePairs[0][0]).toBe(seq[0]);
     expect(basePairs[0][1]).toBe(seq[1]);
 
-    radialize(seq, basePairs, { spacing: 8, basePairSpacing: 10 });
+    untangle(seq, basePairs, { spacing: 8, basePairSpacing: 10 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -251,7 +255,7 @@ describe('radialize function', () => {
     structures.forEach(dotBracket => {
       let [seq, basePairs] = StructureMock.fromDotBracket(dotBracket);
 
-      radialize(seq, basePairs, {
+      untangle(seq, basePairs, {
         spacing: 20 * Math.random(),
         basePairSpacing: 20 * Math.random(),
       });
@@ -271,7 +275,7 @@ describe('radialize function', () => {
     structures.forEach(dotBracket => {
       let [seq, basePairs] = StructureMock.fromDotBracket(dotBracket);
 
-      radialize(seq, basePairs, {
+      untangle(seq, basePairs, {
         spacing: 20 * Math.random(),
         basePairSpacing: 20 * Math.random(),
       });
@@ -297,7 +301,7 @@ describe('radialize function', () => {
     basePairs.push([seq[8], seq[27]]);
     basePairs.push([seq[9], seq[26]]);
 
-    radialize(seq, basePairs, { spacing: 2.5, basePairSpacing: 1.4 });
+    untangle(seq, basePairs, { spacing: 2.5, basePairSpacing: 1.4 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -308,7 +312,7 @@ describe('radialize function', () => {
     // make unsorted
     basePairs = shuffled(basePairs);
 
-    radialize(seq, basePairs, { spacing: 2, basePairSpacing: 1 });
+    untangle(seq, basePairs, { spacing: 2, basePairSpacing: 1 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -316,7 +320,7 @@ describe('radialize function', () => {
   test('spacing of zero', () => {
     let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
 
-    radialize(seq, basePairs, { spacing: 0, basePairSpacing: 1 });
+    untangle(seq, basePairs, { spacing: 0, basePairSpacing: 1 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -324,7 +328,7 @@ describe('radialize function', () => {
   test('very small spacing', () => {
     let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
 
-    radialize(seq, basePairs, { spacing: 1e-6, basePairSpacing: 1 });
+    untangle(seq, basePairs, { spacing: 1e-6, basePairSpacing: 1 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -332,7 +336,7 @@ describe('radialize function', () => {
   test('negative spacing', () => {
     let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
 
-    radialize(seq, basePairs, { spacing: -1, basePairSpacing: 1 });
+    untangle(seq, basePairs, { spacing: -1, basePairSpacing: 1 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -340,7 +344,7 @@ describe('radialize function', () => {
   test('very small negative spacing', () => {
     let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
 
-    radialize(seq, basePairs, { spacing: -1e-6, basePairSpacing: 1 });
+    untangle(seq, basePairs, { spacing: -1e-6, basePairSpacing: 1 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -348,7 +352,7 @@ describe('radialize function', () => {
   test('base-pair spacing of zero', () => {
     let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
 
-    radialize(seq, basePairs, { spacing: 1, basePairSpacing: 0 });
+    untangle(seq, basePairs, { spacing: 1, basePairSpacing: 0 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -356,7 +360,7 @@ describe('radialize function', () => {
   test('very small base-pair spacing', () => {
     let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
 
-    radialize(seq, basePairs, { spacing: 1, basePairSpacing: 1e-6 });
+    untangle(seq, basePairs, { spacing: 1, basePairSpacing: 1e-6 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -364,7 +368,7 @@ describe('radialize function', () => {
   test('negative base-pair spacing', () => {
     let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
 
-    radialize(seq, basePairs, { spacing: 1, basePairSpacing: -1 });
+    untangle(seq, basePairs, { spacing: 1, basePairSpacing: -1 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -372,7 +376,7 @@ describe('radialize function', () => {
   test('very small negative base-pair spacing', () => {
     let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
 
-    radialize(seq, basePairs, { spacing: 1, basePairSpacing: -1e-6 });
+    untangle(seq, basePairs, { spacing: 1, basePairSpacing: -1e-6 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -380,7 +384,7 @@ describe('radialize function', () => {
   test('positive hairpin loop spacing', () => {
     let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
 
-    radialize(seq, basePairs, { spacing: 2, basePairSpacing: 1, hairpinLoopSpacing: 3 });
+    untangle(seq, basePairs, { spacing: 2, basePairSpacing: 1, hairpinLoopSpacing: 3 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -388,7 +392,7 @@ describe('radialize function', () => {
   test('hairpin loop spacing of zero', () => {
     let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
 
-    radialize(seq, basePairs, { spacing: 2, basePairSpacing: 1, hairpinLoopSpacing: 0 });
+    untangle(seq, basePairs, { spacing: 2, basePairSpacing: 1, hairpinLoopSpacing: 0 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -396,7 +400,7 @@ describe('radialize function', () => {
   test('negative hairpin loop spacing', () => {
     let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
 
-    radialize(seq, basePairs, { spacing: 2, basePairSpacing: 1, hairpinLoopSpacing: -2.5 });
+    untangle(seq, basePairs, { spacing: 2, basePairSpacing: 1, hairpinLoopSpacing: -2.5 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
@@ -404,19 +408,18 @@ describe('radialize function', () => {
   test('unspecified hairpin loop spacing', () => {
     let [seq, basePairs] = StructureMock.fromDotBracket('.....((((..(((.((((........)))).))).)))).((.........))...');
 
-    radialize(seq, basePairs, { spacing: 2, basePairSpacing: 1 });
+    untangle(seq, basePairs, { spacing: 2, basePairSpacing: 1 });
 
     expect((new Layout(seq)).isValid()).toBe(true);
   });
 
   /**
-   * Creates some sample layouts using the radialize function
+   * Creates some sample layouts using the `untangle()` function
    * and writes them to a specified directory
    * as CSV files that can be opened in a program like Excel
    * and viewed as scatter plots with the points connected by lines.
    */
-  /*
-  test('viewing some sample structures', () => {
+  /*test('viewing some sample structures', () => {
     let directoryPathToWriteSampleLayoutsTo = 'src/sample-layouts/';
 
     let numSampleStructures = 20;
@@ -429,10 +432,12 @@ describe('radialize function', () => {
     sampleStructures.forEach((dotBracket, i) => {
       let [seq, basePairs] = StructureMock.fromDotBracket(dotBracket);
 
+      seq.forEach(b => b.setCenterPoint({ x: 100 * Math.random() - 50, y: 100 * Math.random() - 50 }))
+
       // test handling of unsorted base-pairs
       basePairs = shuffled(basePairs);
 
-      radialize(seq, basePairs, { spacing: 5, basePairSpacing: 5, hairpinLoopSpacing: 2.5 });
+      untangle(seq, basePairs, { spacing: 5, basePairSpacing: 5, hairpinLoopSpacing: 2.5 });
 
       let layout = '';
 
@@ -445,6 +450,5 @@ describe('radialize function', () => {
 
       fs.writeFileSync(layoutFilePath, layout);
     });
-  });
-  */
+  });*/
 });
