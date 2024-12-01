@@ -40,6 +40,9 @@ export { flipSelfX };
 import { flipSelfY } from './flipSelfY';
 export { flipSelfY };
 
+import { tangent } from './tangent';
+export { tangent };
+
 import { linearize } from './linearize';
 export { linearize };
 
