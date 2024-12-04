@@ -43,6 +43,9 @@ export { flipSelfY };
 import { tangent } from './tangent';
 export { tangent };
 
+import { outwardNormal } from './outwardNormal';
+export { outwardNormal };
+
 import { linearize } from './linearize';
 export { linearize };
 
