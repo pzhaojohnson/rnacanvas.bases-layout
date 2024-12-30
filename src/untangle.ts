@@ -171,12 +171,15 @@ function arrangeSpannedBases(spanningBasePair: BasePair, parentStructure: Struct
 
     let anchorPoint = Point.matching(unpairedBases[0].getCenterPoint());
 
-    stemmify(unpairedBases, {
-      basePairLength: distance(first(unpairedBases).getCenterPoint(), last(unpairedBases).getCenterPoint()),
-      basePairSpacing,
-    });
+    let basePairLength = distance(first(unpairedBases).getCenterPoint(), last(unpairedBases).getCenterPoint());
 
-    unpairedBases.length % 2 != 0 ? round(middleThree(unpairedBases), { spacing }) : {};
+    stemmify(unpairedBases, { basePairLength, basePairSpacing });
+
+    let middleBases = unpairedBases.length % 2 == 0 ? middleFour(unpairedBases) : middleThree(unpairedBases);
+
+    round(middleBases, {
+      spacing: unpairedBases.length >= 5 ? basePairSpacing : basePairLength,
+    });
 
     shift(unpairedBases, displacement(unpairedBases[0].getCenterPoint(), anchorPoint));
   });
@@ -515,4 +518,23 @@ function middleThree<T>(items: T[]): T[] | never {
   let middleIndex = Math.floor(items.length / 2);
 
   return items.slice(middleIndex - 1, middleIndex + 2);
+}
+
+/**
+ * Returns the middle four items in the array.
+ *
+ * Throws for arrays with less than four items
+ * or an odd number of items.
+ */
+function middleFour<T>(items: T[]): T[] | never {
+  if (items.length < 4) {
+    throw new Error('The array has less than four items.');
+  } else if (items.length % 2 != 0) {
+    throw new Error('The array has an odd number of items.');
+  }
+
+  return items.slice(
+    Math.floor(items.length / 2) - 2,
+    Math.floor(items.length / 2) + 2,
+  );
 }
