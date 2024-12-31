@@ -1,6 +1,6 @@
 {
   "name": "@rnacanvas/bases-layout",
-  "version": "4.2.2",
+  "version": "4.2.3",
   "description": "Lay out the bases in a nucleic acid structure drawing",
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
     "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^6.0.1"
   },
   "dependencies": {
     "@rnacanvas/base-pairs": "^2.2.0",
