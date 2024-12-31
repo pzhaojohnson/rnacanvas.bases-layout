@@ -22,7 +22,7 @@ export function outwardNormal(b: Nucleobase, ...parentStructure: Structure): num
 
   let basePairs = parentStructure[1] ?? [];
 
-  let angle = tangent(b, seq) + (Math.PI / 2);
+  let angle = tangent(b, seq) - (Math.PI / 2);
 
   let i = seq.indexOf(b);
 
